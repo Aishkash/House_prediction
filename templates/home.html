@@ -1,3 +1,196 @@
-<h1>
-    hellow world
-</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boston House Price Prediction</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #4f46e5;
+            --primary-hover: #4338ca;
+            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #1f2937;
+            margin-bottom: 30px;
+            font-weight: 600;
+            font-size: 24px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #6b7280;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        input {
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        button {
+            grid-column: span 2;
+            margin-top: 20px;
+            padding: 14px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background: var(--primary-hover);
+        }
+
+        .result-box {
+            margin-top: 25px;
+            padding: 20px;
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 8px;
+            text-align: center;
+            color: #166534;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Boston Housing Predictor</h1>
+
+        <form action="{{ url_for('predict') }}" method="post" class="grid-container">
+            
+            <div class="input-group">
+                <label>CRIM</label>
+                <input type="text" name="CRIM" placeholder="0.006" value="{{ request.form['CRIM'] }}" required />
+            </div>
+            
+            <div class="input-group">
+                <label>ZN</label>
+                <input type="text" name="ZN" placeholder="18.0" value="{{ request.form['ZN'] }}" required />
+            </div>
+
+            <div class="input-group">
+                <label>INDUS</label>
+                <input type="text" name="INDUS" placeholder="2.31" value="{{ request.form['INDUS'] }}" required />
+            </div>
+
+            <div class="input-group">
+                <label>CHAS</label>
+                <input type="text" name="CHAS" placeholder="0" value="{{ request.form['CHAS'] }}" required />
+            </div>
+
+            <div class="input-group">
+                <label>NOX</label>
+                <input type="text" name="NOX" placeholder="0.53" value="{{ request.form['NOX'] }}" required />
+            </div>
+
+            <div class="input-group">
+                <label>RM</label>
+                <input type="text" name="RM" placeholder="6.57" value="{{ request.form['RM'] }}" required />
+            </div>
+
+            <div class="input-group">
+                <label>AGE</label>
+                <input type="text" name="Age" placeholder="65.2" value="{{ request.form['Age'] }}" required />
+            </div>
+
+            <div class="input-group">
+                <label>DIS</label>
+                <input type="text" name="DIS" placeholder="4.09" value="{{ request.form['DIS'] }}" required />
+            </div>
+
+            <div class="input-group">
+                <label>RAD</label>
+                <input type="text" name="RAD" placeholder="1" value="{{ request.form['RAD'] }}" required />
+            </div>
+
+            <div class="input-group">
+                <label>TAX</label>
+                <input type="text" name="TAX" placeholder="296" value="{{ request.form['TAX'] }}" required />
+            </div>
+
+            <div class="input-group">
+                <label>PTRATIO</label>
+                <input type="text" name="PTRATIO" placeholder="15.3" value="{{ request.form['PTRATIO'] }}" required />
+            </div>
+
+            <div class="input-group">
+                <label>B</label>
+                <input type="text" name="B" placeholder="396.9" value="{{ request.form['B'] }}" required />
+            </div>
+
+            <div class="input-group" style="grid-column: span 2;">
+                <label>LSTAT</label>
+                <input type="text" name="LSTAT" placeholder="4.98" value="{{ request.form['LSTAT'] }}" required />
+            </div>
+
+            <button type="submit">Estimate Price</button>
+        </form>
+
+        {% if prediction_text %}
+        <div class="result-box">
+            <strong>Prediction Result:</strong><br>
+            {{ prediction_text }}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
