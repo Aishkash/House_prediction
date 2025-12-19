@@ -99,4 +99,10 @@ Sample JSON Input
 ### Model Used
 - Linear Regression
 
+
+### Live Demo
+https://house-prediction-q3yz.onrender.com
+
+> Note: This app is deployed on Render free tier.  
+> The first request may take 30–60 seconds due to cold start.
  
