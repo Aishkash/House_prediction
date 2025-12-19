@@ -27,12 +27,76 @@ The model is trained using Python and machine learning libraries and saved for f
 
 1. Clone the repository
 2. Open the project in VS Code
-3. Run the Jupyter Notebook to train and test the model
+3. Create and activate the virtual environment
+4. Install dependenies
+```
+    pip install -r requirements.txt
+
+```
+5.	Run the Flask application:
+```
+    python app.py
+
+```
+6.	Open your browser and visit
+---
+
+
+### API endpoint
+
+POST /predict_api
+
+Sample JSON Input
+```
+    {
+  "data": {
+    "crim": 0.00632,
+    "zn": 18.0,
+    "indus": 2.31,
+    "chas": 0,
+    "nox": 0.538,
+    "rm": 6.575,
+    "age": 65.2,
+    "dis": 4.09,
+    "rad": 1,
+    "tax": 296,
+    "ptratio": 15.3,
+    "b": 396.9,
+    "lstat": 4.98
+  }
+}
+
+```
+
+
+### Project  Structure
+
+- app.py – Flask application
+- Boston.ipynb – Model training and analysis
+- regModel.pkl – Trained model
+- scaling.pkl – Feature scaler
+- templates/home.html – Frontend UI
+- requirements.txt – Project dependencies
+
+
+
+
+### Tech Stack
+- Python
+- Flask
+- NumPy
+- Pandas
+- Scikit-learn
+- Matplotlib
+- Gunicorn
 
 ---
 
-### Files Included
+### Deployment
+- deployed on Render
+- Flask app served using Gunicorn
 
-- Boston.ipynb  
-- regmodel.pkl  
-- README.md  
+### Model Used
+- Linear Regression
+
+ 
